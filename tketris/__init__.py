@@ -6,6 +6,7 @@ Tetris using tkinter
 Author:  Anshul Kharbanda
 Created: 10 - 11 - 2018
 """
+from .board import Board
 from tkinter import *
 
 class Tketris(Frame):
@@ -17,3 +18,11 @@ class Tketris(Frame):
         Initializes application instance
         """
         super(Tketris, self).__init__(master)
+        self.init_ui()
+
+    def init_ui(self):
+        """
+        Initializes user interface
+        """
+        self.board = Board()
+        self.board.pack()

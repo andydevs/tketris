@@ -19,6 +19,7 @@ class Tketris(Frame):
         """
         super(Tketris, self).__init__(master)
         self.init_ui()
+        self.run_clock()
 
     def init_ui(self):
         """
@@ -26,3 +27,10 @@ class Tketris(Frame):
         """
         self.board = Board()
         self.board.pack()
+
+    def run_clock(self):
+        """
+        Runs clock
+        """
+        print('Clock ticked!')
+        self.after(1000, self.run_clock)

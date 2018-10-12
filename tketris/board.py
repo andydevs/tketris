@@ -110,6 +110,9 @@ class Board(Frame):
         """
         self.clear_tiles()
         self.draw_tiles(self.mino.tiles, self.mino.color)
+        self.draw_tiles(self.mino.left_bound, '#aaa')
+        self.draw_tiles(self.mino.right_bound, '#aaa')
+        self.draw_tiles(self.mino.down_bound, '#aaa')
 
     def draw_tile(self, tile, color):
         """
@@ -138,21 +141,24 @@ class Board(Frame):
         Move current mino left
         """
         print('Move left called')
-        self.mino.position += np.array([0, -1])
-        self.render()
+        if self.bounds.left_bound.is_within(self.mino.left_bound):
+            self.mino.position += np.array([0, -1])
+            self.render()
 
     def move_right(self, event):
         """
         Move current mino right
         """
         print('Move right called')
-        self.mino.position += np.array([0, 1])
-        self.render()
+        if self.bounds.right_bound.is_within(self.mino.right_bound):
+            self.mino.position += np.array([0, 1])
+            self.render()
 
     def move_down(self, event):
         """
         Move current mino down
         """
         print('Move down called')
-        self.mino.position += np.array([1, 0])
-        self.render()
+        if self.bounds.down_bound.is_within(self.mino.down_bound):
+            self.mino.position += np.array([1, 0])
+            self.render()

@@ -121,3 +121,33 @@ JMino = Mino.new_type('JMino', '#3300ff', [
     [ 1,  0],
     [ 1, -1]
 ])
+LMino = Mino.new_type('LMino', '#ff6600', [
+    [-1,  0],
+    [ 0,  0],
+    [ 1,  0],
+    [ 1,  1]
+])
+TMino = Mino.new_type('TMino', '#ff00ff', [
+    [0, -1],
+    [0,  0],
+    [0,  1],
+    [1,  0]
+])
+SMino = Mino.new_type('SMino', '#ff0000', [
+    [1, -1],
+    [1,  0],
+    [0,  0],
+    [0,  1]
+])
+ZMino = Mino.new_type('ZMino', '#00aa00', [
+    [0, -1],
+    [0,  0],
+    [1,  0],
+    [1,  1]
+])
+OMino = Mino.new_type('OMino', '#999900', [
+    [0, -1],
+    [0,  0],
+    [1, -1],
+    [1,  0]
+])

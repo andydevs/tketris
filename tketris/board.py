@@ -88,8 +88,8 @@ class Board(Frame):
         self.bounds = Bounds()
 
         # Basic mino
-        mino = Mino.random((0, 4))
-        self.draw_tiles(mino.tiles, mino.color)
+        self.mino = Mino.random((0, 4))
+        self.render()
 
     def init_ui(self):
         """
@@ -103,6 +103,13 @@ class Board(Frame):
                 tile.grid(row=i, column=j)
                 row.append(tile)
             self.tiles.append(row)
+
+    def render(self):
+        """
+        Render UI
+        """
+        self.clear_tiles()
+        self.draw_tiles(self.mino.tiles, self.mino.color)
 
     def draw_tile(self, tile, color):
         """
@@ -125,3 +132,27 @@ class Board(Frame):
         for row in self.tiles:
             for tile in row:
                 tile.config(bg='#ccc')
+
+    def move_left(self, event):
+        """
+        Move current mino left
+        """
+        print('Move left called')
+        self.mino.position += np.array([0, -1])
+        self.render()
+
+    def move_right(self, event):
+        """
+        Move current mino right
+        """
+        print('Move right called')
+        self.mino.position += np.array([0, 1])
+        self.render()
+
+    def move_down(self, event):
+        """
+        Move current mino down
+        """
+        print('Move down called')
+        self.mino.position += np.array([1, 0])
+        self.render()

@@ -75,33 +75,15 @@ class Bounds:
             and self.up_bound.is_within(tiles) \
             and self.down_bound.is_within(tiles)
 
-class Board(Frame):
+class GameLogic:
     """
-    Tketris Game Board
+    Tketris Game Logic mixin
     """
-    def __init__(self, master=None):
+    def init_game(self):
         """
-        Initializes Game Board
+        Initialize game
         """
-        super(Board, self).__init__(master)
-        self.init_ui()
         self.bounds = Bounds()
-
-        # Start game
-        self.new_mino()
-
-    def init_ui(self):
-        """
-        Initializes User Interface
-        """
-        self.tiles = []
-        for i in range(20):
-            row = []
-            for j in range(10):
-                tile = Canvas(self, width=20, height=20, bg='#ccc')
-                tile.grid(row=i, column=j)
-                row.append(tile)
-            self.tiles.append(row)
 
     def render(self):
         """
@@ -112,28 +94,6 @@ class Board(Frame):
         self.draw_tiles(self.mino.left_bound, '#aaa')
         self.draw_tiles(self.mino.right_bound, '#aaa')
         self.draw_tiles(self.mino.down_bound, '#aaa')
-
-    def draw_tile(self, tile, color):
-        """
-        Draws the given tile
-        """
-        if self.bounds.within_all_bounds(tile):
-            self.tiles[tile[0]][tile[1]].config(bg=color)
-
-    def draw_tiles(self, tiles, color):
-        """
-        Draws all tiles
-        """
-        for tile in tiles:
-            self.draw_tile(tile, color)
-
-    def clear_tiles(self):
-        """
-        Sets all tiles to clear color
-        """
-        for row in self.tiles:
-            for tile in row:
-                tile.config(bg='#ccc')
 
     def new_mino(self):
         """
@@ -185,3 +145,58 @@ class Board(Frame):
         if self.bounds.down_bound.is_within(self.mino.down_bound):
             self.mino.position += np.array([1, 0])
             self.render()
+
+class RenderLogic:
+    """
+    Tketris Render Logic builtin
+    """
+    def draw_tile(self, tile, color):
+        """
+        Draws the given tile
+        """
+        if self.bounds.within_all_bounds(tile):
+            self.tiles[tile[0]][tile[1]].config(bg=color)
+
+    def draw_tiles(self, tiles, color):
+        """
+        Draws all tiles
+        """
+        for tile in tiles:
+            self.draw_tile(tile, color)
+
+    def clear_tiles(self):
+        """
+        Sets all tiles to clear color
+        """
+        for row in self.tiles:
+            for tile in row:
+                tile.config(bg='#ccc')
+
+
+class Board(Frame, RenderLogic, GameLogic):
+    """
+    Tketris Game Board
+    """
+    def __init__(self, master=None):
+        """
+        Initializes Game Board
+        """
+        super(Board, self).__init__(master)
+        self.init_ui()
+        self.init_game()
+
+        # Start game
+        self.new_mino()
+
+    def init_ui(self):
+        """
+        Initializes User Interface
+        """
+        self.tiles = []
+        for i in range(20):
+            row = []
+            for j in range(10):
+                tile = Canvas(self, width=20, height=20, bg='#ccc')
+                tile.grid(row=i, column=j)
+                row.append(tile)
+            self.tiles.append(row)

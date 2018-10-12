@@ -12,6 +12,9 @@ class Board(Frame):
     """
     Tketris Game Board
     """
+    clear_color = None
+    box_size = 20
+
     def __init__(self, master=None):
         """
         Initializes Game Board
@@ -23,11 +26,19 @@ class Board(Frame):
         """
         Initializes User Interface
         """
+        # Set color to background if color is not given
+        if self.clear_color is None:
+            self.clear_color = self.master['bg']
+
+        # Set tiles
         self.tiles = []
         for i in range(20):
             row = []
             for j in range(10):
-                tile = Canvas(self, width=20, height=20, bg='#ccc')
+                tile = Canvas(self,
+                    width=self.box_size,
+                    height=self.box_size,
+                    bg=self.clear_color)
                 tile.grid(row=i, column=j)
                 row.append(tile)
             self.tiles.append(row)
@@ -52,4 +63,4 @@ class Board(Frame):
         """
         for row in self.tiles:
             for tile in row:
-                tile.config(bg='#ccc')
+                tile.config(bg=self.clear_color)

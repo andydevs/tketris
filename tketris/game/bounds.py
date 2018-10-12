@@ -47,7 +47,7 @@ class BoardBound:
         True if any tiles are outside the bound
         """
         return self._check_bound(
-            check=np.greater_equal if self.positive else np.less_equal,
+            check=np.greater if self.positive else np.less,
             combine=np.any,
             tiles=tiles)
 

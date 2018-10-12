@@ -6,10 +6,11 @@ Tetris using tkinter
 Author:  Anshul Kharbanda
 Created: 10 - 11 - 2018
 """
+from .game import GameLogic
 from .board import Board
 from tkinter import *
 
-class Tketris(Frame):
+class Tketris(Frame, GameLogic):
     """
     Tketris application instance
     """
@@ -20,6 +21,7 @@ class Tketris(Frame):
         super(Tketris, self).__init__(master)
         self.init_ui()
         self.init_events()
+        self.init_game()
         self.run_clock()
 
     def init_ui(self):
@@ -33,15 +35,15 @@ class Tketris(Frame):
         """
         Docstring for init_events
         """
-        self.master.bind('<Up>', self.board.rotate)
-        self.master.bind('<Left>', self.board.move_left)
-        self.master.bind('<Right>', self.board.move_right)
-        self.master.bind('<Down>', self.board.move_down)
+        self.master.bind('<Up>', self.rotate)
+        self.master.bind('<Left>', self.move_left)
+        self.master.bind('<Right>', self.move_right)
+        self.master.bind('<Down>', self.move_down)
 
     def run_clock(self):
         """
         Runs clock
         """
         print('Clock ticked!')
-        self.board.clock_tick_update()
+        self.clock_tick_update()
         self.master.after(1000, self.run_clock)

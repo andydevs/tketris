@@ -7,9 +7,8 @@ Author:  Anshul Kharbanda
 Created: 10 - 11 - 2018
 """
 from tkinter import *
-from .game import GameLogic
 
-class Board(Frame, GameLogic):
+class Board(Frame):
     """
     Tketris Game Board
     """
@@ -19,10 +18,6 @@ class Board(Frame, GameLogic):
         """
         super(Board, self).__init__(master)
         self.init_ui()
-        self.init_game()
-
-        # Start game
-        self.new_mino()
 
     def init_ui(self):
         """

@@ -8,7 +8,7 @@ Created: 10 - 11 - 2018
 """
 import numpy as np
 from .bounds import Bounds
-from .mino import Mino
+from .mino import Mino, IMino, JMino
 
 class GameLogic:
     """
@@ -19,16 +19,18 @@ class GameLogic:
         Initialize game
         """
         self.bounds = Bounds()
+        self.new_mino()
 
     def render(self):
         """
         Render UI
         """
-        self.clear_tiles()
-        self.draw_tiles(self.mino.tiles, self.mino.color)
-        self.draw_tiles(self.mino.left_bound, '#aaa')
-        self.draw_tiles(self.mino.right_bound, '#aaa')
-        self.draw_tiles(self.mino.down_bound, '#aaa')
+        # Render to board
+        self.board.clear_tiles()
+        self.board.draw_tiles(self.mino.tiles, self.mino.color)
+        self.board.draw_tiles(self.mino.left_bound, '#aaa')
+        self.board.draw_tiles(self.mino.right_bound, '#aaa')
+        self.board.draw_tiles(self.mino.down_bound, '#aaa')
 
     def new_mino(self):
         """

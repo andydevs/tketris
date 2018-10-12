@@ -7,8 +7,8 @@ Author:  Anshul Kharbanda
 Created: 10 - 11 - 2018
 """
 import numpy as np
-from .bounds import Bounds
-from .mino import Mino, IMino, JMino
+from .bounds import BoardBounds, TileSetBound
+from .mino import Mino, IMino, JMino, SMino
 
 class GameLogic:
     """
@@ -18,19 +18,42 @@ class GameLogic:
         """
         Initialize game
         """
-        self.bounds = Bounds()
+        self.bounds = BoardBounds()
+        self.tiles = [
+            (19, 1, IMino.color),
+            (18, 1, SMino.color),
+            (17, 1, SMino.color),
+            (17, 2, SMino.color),
+            (19, 5, JMino.color),
+        ]
         self.new_mino()
 
     def render(self):
         """
         Render UI
         """
-        # Render to board
+        # Clear all tiles in board
         self.board.clear_tiles()
-        self.board.draw_tiles(self.mino.tiles, self.mino.color)
+
         self.board.draw_tiles(self.mino.left_bound, '#aaa')
         self.board.draw_tiles(self.mino.right_bound, '#aaa')
         self.board.draw_tiles(self.mino.down_bound, '#aaa')
+
+        # Draw boundaries of tiles
+        tile_array = np.array([ [i, j] for i, j, color in self.tiles ])
+        up_boundary = TileSetBound(tile_array, np.array([-1, 0]))
+        left_boundary = TileSetBound(tile_array, np.array([0, -1]))
+        right_boundary = TileSetBound(tile_array, np.array([0, 1]))
+        self.board.draw_tiles(up_boundary.tiles, '#aaa')
+        self.board.draw_tiles(left_boundary.tiles, '#aaa')
+        self.board.draw_tiles(right_boundary.tiles, '#aaa')
+
+        # Render current mino
+        self.board.draw_tiles(self.mino.tiles, self.mino.color)
+
+        # Render tiles on ground
+        for i, j, color in self.tiles:
+            self.board.draw_tile((i, j), color)
 
     def new_mino(self):
         """

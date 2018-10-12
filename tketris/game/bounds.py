@@ -8,9 +8,9 @@ Created: 10 - 11 - 2018
 """
 import numpy as np
 
-class Bound:
+class BoardBound:
     """
-    Tketris side bound
+    Tketris bound for a side of the game board
     """
     def __init__(self, index, endpoint, positive):
         """
@@ -51,18 +51,18 @@ class Bound:
             combine=np.any,
             tiles=tiles)
 
-class Bounds:
+class BoardBounds:
     """
-    Tketris game bounds
+    All Tketris game board bounds
     """
     def __init__(self):
         """
         Initializes bounds
         """
-        self.left_bound = Bound(1, 0, False)
-        self.right_bound = Bound(1, 9, True)
-        self.up_bound = Bound(0, 0, False)
-        self.down_bound = Bound(0, 19, True)
+        self.left_bound = BoardBound(1, 0, False)
+        self.right_bound = BoardBound(1, 9, True)
+        self.up_bound = BoardBound(0, 0, False)
+        self.down_bound = BoardBound(0, 19, True)
 
     def within_all_bounds(self, tiles):
         """
@@ -72,3 +72,25 @@ class Bounds:
             and self.right_bound.is_within(tiles) \
             and self.up_bound.is_within(tiles) \
             and self.down_bound.is_within(tiles)
+
+class TileSetBound:
+    """
+    Bound for a side of a set of tiles
+    """
+    def __init__(self, root_tiles, direction):
+        """
+        Initializes instance
+        """
+        self.root_tiles = root_tiles
+        self.direction = direction
+
+    @property
+    def tiles(self):
+        """
+        Docstring for bound property
+        """
+        individual_boundaries = self.root_tiles + self.direction
+        return np.array([
+            boundary for boundary in individual_boundaries
+            if not any(np.all(np.equal(tile, boundary)) for tile in self.root_tiles)
+        ])

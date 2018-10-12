@@ -33,6 +33,7 @@ class Tketris(Frame):
         """
         Docstring for init_events
         """
+        self.master.bind('<Up>', self.board.rotate)
         self.master.bind('<Left>', self.board.move_left)
         self.master.bind('<Right>', self.board.move_right)
         self.master.bind('<Down>', self.board.move_down)

@@ -151,6 +151,14 @@ class Board(Frame):
         else:
             self.move_down()
 
+    def rotate(self, event):
+        """
+        Rotate current mino
+        """
+        print('Rotate called')
+        self.mino.orientation = (self.mino.orientation + 1) % 4
+        self.render()
+
     def move_left(self, event=None):
         """
         Move current mino left

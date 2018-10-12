@@ -87,9 +87,8 @@ class Board(Frame):
         self.init_ui()
         self.bounds = Bounds()
 
-        # Basic mino
-        self.mino = Mino.random((0, 4))
-        self.render()
+        # Start game
+        self.new_mino()
 
     def init_ui(self):
         """
@@ -136,7 +135,23 @@ class Board(Frame):
             for tile in row:
                 tile.config(bg='#ccc')
 
-    def move_left(self, event):
+    def new_mino(self):
+        """
+        Initialize new mino
+        """
+        self.mino = Mino.random()
+        self.render()
+
+    def clock_tick_update(self):
+        """
+        Docstring for clock_tick_update
+        """
+        if self.bounds.down_bound.is_outside(self.mino.down_bound):
+            self.new_mino()
+        else:
+            self.move_down()
+
+    def move_left(self, event=None):
         """
         Move current mino left
         """
@@ -145,7 +160,7 @@ class Board(Frame):
             self.mino.position += np.array([0, -1])
             self.render()
 
-    def move_right(self, event):
+    def move_right(self, event=None):
         """
         Move current mino right
         """
@@ -154,7 +169,7 @@ class Board(Frame):
             self.mino.position += np.array([0, 1])
             self.render()
 
-    def move_down(self, event):
+    def move_down(self, event=None):
         """
         Move current mino down
         """

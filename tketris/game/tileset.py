@@ -18,28 +18,28 @@ class TileSet:
         """
         Left boundary of tileset
         """
-        return TileSetBound(self.tiles, 1, False)
+        return TileSetBound(self.tiles, 1, -1)
 
     @property
     def right_bound(self):
         """
         Right boundary of tileset
         """
-        return TileSetBound(self.tiles, 1, True)
+        return TileSetBound(self.tiles, 1, 1)
 
     @property
     def up_bound(self):
         """
         Upper boundary of tileset
         """
-        return TileSetBound(self.tiles, 0, False)
+        return TileSetBound(self.tiles, 0, -1)
 
     @property
     def down_bound(self):
         """
         Lower boundary of tileset
         """
-        return TileSetBound(self.tiles, 0, True)
+        return TileSetBound(self.tiles, 0, 1)
 
 class BoardTileSet(TileSet):
     """

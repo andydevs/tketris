@@ -12,36 +12,29 @@ class TileSetBound:
     """
     Bound for a side of a set of tiles
     """
-    def __init__(self, root_tiles, axis, positive):
+    def __init__(self, root_tiles, axis, direction):
         """
         Initializes instance
         """
         self.root_tiles = root_tiles
         self.axis = axis
-        self.positive = positive
+        self.direction = direction
 
     @property
-    def direction(self):
+    def normal(self):
         """
         Docstring for direction_vector property
         """
-        if self.axis:
-            if self.positive:
-                return np.array([ 0, 1 ])
-            else:
-                return np.array([ 0, -1 ])
-        else:
-            if self.positive:
-                return np.array([ 1, 0 ])
-            else:
-                return np.array([ -1, 0 ])
+        norm = np.array([ 0, 0 ])
+        norm[self.axis] = self.direction
+        return norm
 
     @property
     def tiles(self):
         """
         Docstring for bound property
         """
-        individual_boundaries = self.root_tiles + self.direction
+        individual_boundaries = self.root_tiles + self.normal
         return np.array([
             boundary for boundary in individual_boundaries
             if not any(np.all(np.equal(tile, boundary)) for tile in self.root_tiles)

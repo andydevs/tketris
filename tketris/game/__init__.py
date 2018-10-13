@@ -38,14 +38,14 @@ class GameLogic:
         self.board.clear_tiles()
 
         # Draw boundaries of tiles
-        self.board.draw_tiles(self.board_tileset.left_bound.tiles, '#aaa')
-        self.board.draw_tiles(self.board_tileset.right_bound.tiles, '#aaa')
-        self.board.draw_tiles(self.board_tileset.down_bound.tiles, '#aaa')
+        self.board.draw_tiles(self.board_tileset.left_bound.tiles, '#faa')
+        self.board.draw_tiles(self.board_tileset.right_bound.tiles, '#afa')
+        self.board.draw_tiles(self.board_tileset.up_bound.tiles, '#aaf')
 
         # Draw boundaries of mino
-        self.board.draw_tiles(self.mino.left_bound, '#aaa')
-        self.board.draw_tiles(self.mino.right_bound, '#aaa')
-        self.board.draw_tiles(self.mino.down_bound, '#aaa')
+        self.board.draw_tiles(self.mino.left_bound, '#faa')
+        self.board.draw_tiles(self.mino.right_bound, '#afa')
+        self.board.draw_tiles(self.mino.down_bound, '#aaf')
 
         # Render tiles on ground
         for i, j, color in self.board_tileset.tile_colors:

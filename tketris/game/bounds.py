@@ -8,6 +8,45 @@ Created: 10 - 11 - 2018
 """
 import numpy as np
 
+class TileSetBound:
+    """
+    Bound for a side of a set of tiles
+    """
+    def __init__(self, root_tiles, axis, positive):
+        """
+        Initializes instance
+        """
+        self.root_tiles = root_tiles
+        self.axis = axis
+        self.positive = positive
+
+    @property
+    def direction(self):
+        """
+        Docstring for direction_vector property
+        """
+        if self.axis:
+            if self.positive:
+                return np.array([ 0, 1 ])
+            else:
+                return np.array([ 0, -1 ])
+        else:
+            if self.positive:
+                return np.array([ 1, 0 ])
+            else:
+                return np.array([ -1, 0 ])
+
+    @property
+    def tiles(self):
+        """
+        Docstring for bound property
+        """
+        individual_boundaries = self.root_tiles + self.direction
+        return np.array([
+            boundary for boundary in individual_boundaries
+            if not any(np.all(np.equal(tile, boundary)) for tile in self.root_tiles)
+        ])
+
 class BoardBound:
     """
     Tketris bound for a side of the game board
@@ -72,25 +111,3 @@ class BoardBounds:
             and self.right_bound.is_within(tiles) \
             and self.up_bound.is_within(tiles) \
             and self.down_bound.is_within(tiles)
-
-class TileSetBound:
-    """
-    Bound for a side of a set of tiles
-    """
-    def __init__(self, root_tiles, direction):
-        """
-        Initializes instance
-        """
-        self.root_tiles = root_tiles
-        self.direction = direction
-
-    @property
-    def tiles(self):
-        """
-        Docstring for bound property
-        """
-        individual_boundaries = self.root_tiles + self.direction
-        return np.array([
-            boundary for boundary in individual_boundaries
-            if not any(np.all(np.equal(tile, boundary)) for tile in self.root_tiles)
-        ])

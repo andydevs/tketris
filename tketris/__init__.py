@@ -14,6 +14,8 @@ class Tketris(Frame, GameLogic):
     """
     Tketris application instance
     """
+    DEBUG = False
+
     def __init__(self, master=None):
         """
         Initializes application instance

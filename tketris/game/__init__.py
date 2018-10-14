@@ -62,6 +62,7 @@ class GameLogic:
         """
         if not self.can_move_down():
             self.board_tileset.add_tiles(self.mino.tiles, self.mino.color)
+            self.board_tileset.clear_rows()
             self.new_mino()
             if not self.can_move_down():
                 self.game_continue = False

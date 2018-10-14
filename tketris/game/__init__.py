@@ -37,15 +37,17 @@ class GameLogic:
         # Clear all tiles in board
         self.board.clear_tiles()
 
-        # Draw boundaries of tiles
-        self.board.draw_tiles(self.board_tileset.left_bound.tiles, '#faa')
-        self.board.draw_tiles(self.board_tileset.right_bound.tiles, '#afa')
-        self.board.draw_tiles(self.board_tileset.up_bound.tiles, '#aaf')
+        # If debugging
+        if self.DEBUG:
+            # Draw boundaries of board
+            self.board.draw_tiles(self.bounds.left_bound.tiles, '#faa')
+            self.board.draw_tiles(self.bounds.right_bound.tiles, '#afa')
+            self.board.draw_tiles(self.bounds.down_bound.tiles, '#aaf')
 
-        # Draw boundaries of mino
-        self.board.draw_tiles(self.mino.left_bound, '#faa')
-        self.board.draw_tiles(self.mino.right_bound, '#afa')
-        self.board.draw_tiles(self.mino.down_bound, '#aaf')
+            # Draw boundaries of board tiles
+            self.board.draw_tiles(self.board_tileset.left_bound.tiles, '#faa')
+            self.board.draw_tiles(self.board_tileset.right_bound.tiles, '#afa')
+            self.board.draw_tiles(self.board_tileset.up_bound.tiles, '#aaf')
 
         # Render tiles on ground
         for i, j, color in self.board_tileset.tile_colors:
@@ -65,7 +67,10 @@ class GameLogic:
         """
         Docstring for clock_tick_update
         """
-        self.move_down()
+        if not self.can_move_down():
+            self.new_mino()
+        else:
+            self.move_down()
 
     def rotate(self, event):
         """
@@ -78,8 +83,10 @@ class GameLogic:
         """
         True if the current mino can move left
         """
-        return self.bounds.left_bound.is_within(self.mino.left_bound) \
-            and not self.board_tileset.right_bound.collision(self.mino.tiles)
+        return not (
+            self.bounds.left_bound.collision(self.mino.tiles) \
+            or self.board_tileset.right_bound.collision(self.mino.tiles)
+        )
 
     def move_left(self, event=None):
         """
@@ -93,8 +100,10 @@ class GameLogic:
         """
         True if the current mino can move right
         """
-        return self.bounds.right_bound.is_within(self.mino.right_bound) \
-            and not self.board_tileset.left_bound.collision(self.mino.tiles)
+        return not (
+            self.bounds.right_bound.collision(self.mino.tiles) \
+            or self.board_tileset.left_bound.collision(self.mino.tiles)
+        )
 
     def move_right(self, event=None):
         """
@@ -108,8 +117,10 @@ class GameLogic:
         """
         True if the current mino can move down
         """
-        return self.bounds.down_bound.is_within(self.mino.down_bound) \
-            and not self.board_tileset.up_bound.collision(self.mino.tiles)
+        return not (
+            self.bounds.down_bound.collision(self.mino.tiles) \
+            or self.board_tileset.up_bound.collision(self.mino.tiles)
+        )
 
     def move_down(self, event=None):
         """

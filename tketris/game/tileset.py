@@ -9,10 +9,23 @@ Created: 10 - 11 - 2018
 import numpy as np
 from .bounds import TileSetBound
 
-class TileSet:
+class BoardTileSet(TileSet):
     """
-    Represents a unitary set of tiles in Tketris
+    Current tiles on the board
     """
+    def __init__(self, tile_colors=[]):
+        """
+        Initializes instance
+        """
+        self.tile_colors = tile_colors
+
+    @property
+    def tiles(self):
+        """
+        Docstring for tiles property
+        """
+        return np.array([[i, j] for i, j, color in self.tile_colors])
+
     @property
     def left_bound(self):
         """
@@ -33,27 +46,3 @@ class TileSet:
         Upper boundary of tileset
         """
         return TileSetBound(self.tiles, 0, -1)
-
-    @property
-    def down_bound(self):
-        """
-        Lower boundary of tileset
-        """
-        return TileSetBound(self.tiles, 0, 1)
-
-class BoardTileSet(TileSet):
-    """
-    Current tiles on the board
-    """
-    def __init__(self, tile_colors=[]):
-        """
-        Initializes instance
-        """
-        self.tile_colors = tile_colors
-
-    @property
-    def tiles(self):
-        """
-        Docstring for tiles property
-        """
-        return np.array([[i, j] for i, j, color in self.tile_colors])

@@ -8,7 +8,25 @@ Created: 10 - 11 - 2018
 """
 import numpy as np
 
-class TileSetBound:
+class Bound:
+    """
+    Generic bound class
+    """
+    def collision(self, tiles):
+        """
+        Check if any tiles equals one of the bounds
+        """
+        return np.any([
+            np.any([
+                np.all(
+                    np.equal(bound, tile)
+                )
+                for bound in self.tiles
+            ])
+            for tile in tiles
+        ])
+
+class TileSetBound(Bound):
     """
     Bound for a side of a set of tiles
     """
@@ -40,59 +58,29 @@ class TileSetBound:
             if not any(np.all(np.equal(tile, boundary)) for tile in self.root_tiles)
         ])
 
-    def collision(self, tiles):
-        """
-        Check if any tiles equals one of the bounds
-        """
-        return np.any([
-            np.any([
-                np.all(np.equal(bound, tile)) for bound in self.tiles
-            ])
-            for tile in tiles
-        ])
-
-class BoardBound:
+class BoardBound(Bound):
     """
-    Tketris bound for a side of the game board
+    Game board bound
     """
-    def __init__(self, index, endpoint, positive):
+    def __init__(self, axis, endpoint, size):
         """
-        Initialize side bound
-
-        :param index: the index to check
-        :param endpoint: the endpoint value of the bound
-        :param positive: true if the value has to be less than the endpoint
+        Initializes instance
         """
-        self.index = index
+        self.axis = axis
         self.endpoint = endpoint
-        self.positive = positive
+        self.size = size
 
-    def _check_bound(self, check, combine, tiles):
+    @property
+    def tiles(self):
         """
-        Generic boundary checker for the given tiles
+        Docstring for tiles property
         """
-        if len(tiles.shape) == 1:
-            return check(tiles[self.index], self.endpoint)
-        else:
-            return combine(check(tiles[:, self.index], self.endpoint))
-
-    def is_within(self, tiles):
-        """
-        True if all tiles are within the bound
-        """
-        return self._check_bound(
-            check=np.less_equal if self.positive else np.greater_equal,
-            combine=np.all,
-            tiles=tiles)
-
-    def is_outside(self, tiles):
-        """
-        True if any tiles are outside the bound
-        """
-        return self._check_bound(
-            check=np.greater if self.positive else np.less,
-            combine=np.any,
-            tiles=tiles)
+        tiles = []
+        for i in range(self.size):
+            tile = [i, i]
+            tile[self.axis] = self.endpoint
+            tiles.append(tile)
+        return np.array(tiles)
 
 class BoardBounds:
     """
@@ -102,16 +90,6 @@ class BoardBounds:
         """
         Initializes bounds
         """
-        self.left_bound = BoardBound(1, 0, False)
-        self.right_bound = BoardBound(1, 9, True)
-        self.up_bound = BoardBound(0, 0, False)
-        self.down_bound = BoardBound(0, 19, True)
-
-    def within_all_bounds(self, tiles):
-        """
-        True if the tiles are within all bounds
-        """
-        return self.left_bound.is_within(tiles) \
-            and self.right_bound.is_within(tiles) \
-            and self.up_bound.is_within(tiles) \
-            and self.down_bound.is_within(tiles)
+        self.left_bound = BoardBound(1, 0, 20)
+        self.right_bound = BoardBound(1, 9, 20)
+        self.down_bound = BoardBound(0, 19, 10)

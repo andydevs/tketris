@@ -9,7 +9,7 @@ Created: 10 - 11 - 2018
 import numpy as np
 from .bounds import TileSetBound
 
-class BoardTileSet(TileSet):
+class BoardTileSet:
     """
     Current tiles on the board
     """

@@ -40,6 +40,17 @@ class TileSetBound:
             if not any(np.all(np.equal(tile, boundary)) for tile in self.root_tiles)
         ])
 
+    def collision(self, tiles):
+        """
+        Check if any tiles equals one of the bounds
+        """
+        return np.any([
+            np.any([
+                np.all(np.equal(bound, tile)) for bound in self.tiles
+            ])
+            for tile in tiles
+        ])
+
 class BoardBound:
     """
     Tketris bound for a side of the game board

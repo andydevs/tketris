@@ -65,42 +65,56 @@ class GameLogic:
         """
         Docstring for clock_tick_update
         """
-        if self.bounds.down_bound.is_outside(self.mino.down_bound):
-            self.new_mino()
-        else:
-            self.move_down()
+        self.move_down()
 
     def rotate(self, event):
         """
         Rotate current mino
         """
-        print('Rotate called')
         self.mino.orientation = (self.mino.orientation + 1) % 4
         self.render()
+
+    def can_move_left(self):
+        """
+        True if the current mino can move left
+        """
+        return self.bounds.left_bound.is_within(self.mino.left_bound) \
+            and not self.board_tileset.right_bound.collision(self.mino.tiles)
 
     def move_left(self, event=None):
         """
         Move current mino left
         """
-        print('Move left called')
-        if self.bounds.left_bound.is_within(self.mino.left_bound):
+        if self.can_move_left():
             self.mino.position += np.array([0, -1])
             self.render()
+
+    def can_move_right(self):
+        """
+        True if the current mino can move right
+        """
+        return self.bounds.right_bound.is_within(self.mino.right_bound) \
+            and not self.board_tileset.left_bound.collision(self.mino.tiles)
 
     def move_right(self, event=None):
         """
         Move current mino right
         """
-        print('Move right called')
-        if self.bounds.right_bound.is_within(self.mino.right_bound):
+        if self.can_move_right():
             self.mino.position += np.array([0, 1])
             self.render()
+
+    def can_move_down(self):
+        """
+        True if the current mino can move down
+        """
+        return self.bounds.down_bound.is_within(self.mino.down_bound) \
+            and not self.board_tileset.up_bound.collision(self.mino.tiles)
 
     def move_down(self, event=None):
         """
         Move current mino down
         """
-        print('Move down called')
-        if self.bounds.down_bound.is_within(self.mino.down_bound):
+        if self.can_move_down():
             self.mino.position += np.array([1, 0])
             self.render()

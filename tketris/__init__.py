@@ -46,6 +46,5 @@ class Tketris(Frame, GameLogic):
         """
         Runs clock
         """
-        print('Clock ticked!')
         self.clock_tick_update()
         self.master.after(1000, self.run_clock)

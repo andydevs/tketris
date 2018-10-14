@@ -19,6 +19,13 @@ class BoardTileSet:
         """
         self.tile_colors = tile_colors
 
+    def add_tiles(self, tiles, color):
+        """
+        Adds the given tiles in the given color to the tileset
+        """
+        for tile in tiles:
+            self.tile_colors.append((tile[0], tile[1], color))
+
     @property
     def tiles(self):
         """

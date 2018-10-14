@@ -20,14 +20,7 @@ class GameLogic:
         Initialize game
         """
         self.bounds = BoardBounds()
-        self.board_tileset = BoardTileSet([
-            (19, 1, SMino.color),
-            (18, 1, JMino.color),
-            (17, 1, JMino.color),
-            (17, 2, JMino.color),
-            (19, 4, IMino.color),
-            (19, 5, SMino.color)
-        ])
+        self.board_tileset = BoardTileSet([])
         self.new_mino()
 
     def render(self):
@@ -68,6 +61,7 @@ class GameLogic:
         Docstring for clock_tick_update
         """
         if not self.can_move_down():
+            self.board_tileset.add_tiles(self.mino.tiles, self.mino.color)
             self.new_mino()
         else:
             self.move_down()

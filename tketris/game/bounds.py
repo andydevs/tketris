@@ -52,11 +52,14 @@ class TileSetBound(Bound):
         """
         Docstring for bound property
         """
-        individual_boundaries = self.root_tiles + self.normal
-        return np.array([
-            boundary for boundary in individual_boundaries
-            if not any(np.all(np.equal(tile, boundary)) for tile in self.root_tiles)
-        ])
+        if self.root_tiles.shape[0] == 0:
+            return np.array([])
+        else:
+            individual_boundaries = self.root_tiles + self.normal
+            return np.array([
+                boundary for boundary in individual_boundaries
+                if not any(np.all(np.equal(tile, boundary)) for tile in self.root_tiles)
+            ])
 
 class BoardBound(Bound):
     """

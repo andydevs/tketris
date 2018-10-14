@@ -24,7 +24,7 @@ class Tketris(Frame, GameLogic):
         self.init_ui()
         self.init_events()
         self.init_game()
-        self.run_clock()
+        self.start_game()
 
     def init_ui(self):
         """
@@ -37,14 +37,50 @@ class Tketris(Frame, GameLogic):
         """
         Docstring for init_events
         """
-        self.master.bind('<Up>', self.rotate)
-        self.master.bind('<Left>', self.move_left)
-        self.master.bind('<Right>', self.move_right)
-        self.master.bind('<Down>', self.move_down)
+        self.master.bind('<Up>', self.handle_up)
+        self.master.bind('<Left>', self.handle_left)
+        self.master.bind('<Right>', self.handle_right)
+        self.master.bind('<Down>', self.handle_down)
+
+    def handle_up(self, event):
+        """
+        Docstring for handle_up
+        """
+        if self.game_continue:
+            self.rotate()
+
+    def handle_left(self, event):
+        """
+        Docstring for handle_down
+        """
+        if self.game_continue:
+            self.move_left()
+
+    def handle_right(self, event):
+        """
+        Docstring for handle_down
+        """
+        if self.game_continue:
+            self.move_right()
+
+    def handle_down(self, event):
+        """
+        Docstring for handle_down
+        """
+        if self.game_continue:
+            self.move_down()
+
+    def start_game(self):
+        """
+        Starts clock
+        """
+        self.game_continue = True
+        self.run_clock()
 
     def run_clock(self):
         """
         Runs clock
         """
-        self.clock_tick_update()
-        self.master.after(1000, self.run_clock)
+        if self.game_continue:
+            self.clock_tick_update()
+            self.master.after(1000, self.run_clock)

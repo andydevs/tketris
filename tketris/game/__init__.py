@@ -63,10 +63,12 @@ class GameLogic:
         if not self.can_move_down():
             self.board_tileset.add_tiles(self.mino.tiles, self.mino.color)
             self.new_mino()
+            if not self.can_move_down():
+                self.game_continue = False
         else:
             self.move_down()
 
-    def rotate(self, event):
+    def rotate(self):
         """
         Rotate current mino
         """
@@ -82,7 +84,7 @@ class GameLogic:
             or self.board_tileset.right_bound.collision(self.mino.tiles)
         )
 
-    def move_left(self, event=None):
+    def move_left(self):
         """
         Move current mino left
         """
@@ -99,7 +101,7 @@ class GameLogic:
             or self.board_tileset.left_bound.collision(self.mino.tiles)
         )
 
-    def move_right(self, event=None):
+    def move_right(self):
         """
         Move current mino right
         """
@@ -116,7 +118,7 @@ class GameLogic:
             or self.board_tileset.up_bound.collision(self.mino.tiles)
         )
 
-    def move_down(self, event=None):
+    def move_down(self):
         """
         Move current mino down
         """

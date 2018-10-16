@@ -8,6 +8,7 @@ Created: 10 - 11 - 2018
 """
 from .game import GameLogic
 from .board import Board
+from .side_menu import SideMenu
 from tkinter import *
 
 class Tketris(Frame, GameLogic):
@@ -30,8 +31,10 @@ class Tketris(Frame, GameLogic):
         """
         Initializes user interface
         """
-        self.board = Board()
-        self.board.pack()
+        self.board = Board(self)
+        self.board.pack(side=LEFT, fill=Y)
+        self.menu = SideMenu(self)
+        self.menu.pack(side=RIGHT, fill=Y)
 
     def init_events(self):
         """

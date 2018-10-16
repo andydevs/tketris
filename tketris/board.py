@@ -12,6 +12,7 @@ class Board(Frame):
     """
     Tketris Game Board
     """
+    bg_color = "white"
     clear_color = None
     box_size = 20
 
@@ -19,7 +20,7 @@ class Board(Frame):
         """
         Initializes Game Board
         """
-        super(Board, self).__init__(master)
+        super(Board, self).__init__(master, bg=self.bg_color)
         self.init_ui()
 
     def init_ui(self):

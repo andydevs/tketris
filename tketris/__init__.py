@@ -33,8 +33,8 @@ class Tketris(Frame, GameLogic):
         """
         self.board = Board(self)
         self.board.pack(side=LEFT, fill=Y)
-        self.menu = SideMenu(self)
-        self.menu.pack(side=RIGHT, fill=Y)
+        self.side_menu = SideMenu(self)
+        self.side_menu.pack(side=RIGHT, fill=Y)
 
     def init_events(self):
         """
@@ -77,6 +77,7 @@ class Tketris(Frame, GameLogic):
         """
         Starts clock
         """
+        self.side_menu.select_playing()
         self.game_continue = True
         self.run_clock()
 
@@ -87,3 +88,9 @@ class Tketris(Frame, GameLogic):
         if self.game_continue:
             self.clock_tick_update()
             self.master.after(1000, self.run_clock)
+
+    def game_over_event(self):
+        """
+        Docstring for game_over_event
+        """
+        self.side_menu.select_game_over()

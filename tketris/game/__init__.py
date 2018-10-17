@@ -66,6 +66,7 @@ class GameLogic:
             self.new_mino()
             if not self.can_move_down():
                 self.game_continue = False
+                self.game_over_event()
         else:
             self.move_down()
 
@@ -126,3 +127,9 @@ class GameLogic:
         if self.can_move_down():
             self.mino.position += np.array([1, 0])
             self.render()
+
+    def game_over_event(self):
+        """
+        Docstring for game_over_event
+        """
+        pass

@@ -7,8 +7,8 @@ Author:  Anshul Kharbanda
 Created: 10 - 11 - 2018
 """
 from .game import GameLogic
-from .board import Board
-from .side_menu import SideMenu
+from .view.board import Board
+from .view.side_menu import SideMenu
 from tkinter import *
 
 class Tketris(Frame, GameLogic):
@@ -45,7 +45,7 @@ class Tketris(Frame, GameLogic):
         self.master.bind('<Right>', self.move_right)
         self.master.bind('<Down>', self.move_down)
 
-    def handle_reset_game(self):
+    def reset_game(self):
         """
         Docstring for handle_reset_game
         """

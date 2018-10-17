@@ -53,7 +53,7 @@ class SideMenu(Frame):
         """
         Docstring for reset_game
         """
-        self.master.handle_reset_game()
+        self.master.reset_game()
 
 class PlayingMenu(Frame):
     """

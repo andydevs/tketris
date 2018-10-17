@@ -19,6 +19,12 @@ class BoardTileSet:
         """
         self.tile_colors = tile_colors
 
+    def clear_tiles(self):
+        """
+        Docstring for clear_tiles
+        """
+        self.tile_colors = []
+
     def add_tiles(self, tiles, color):
         """
         Adds the given tiles in the given color to the tileset

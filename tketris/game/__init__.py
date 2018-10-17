@@ -49,6 +49,12 @@ class GameLogic:
         # Render current mino
         self.board.draw_tiles(self.mino.tiles, self.mino.color)
 
+    def clear_tiles(self):
+        """
+        Docstring for clear_tiles
+        """
+        self.board_tileset.clear_tiles()
+
     def new_mino(self):
         """
         Initialize new mino

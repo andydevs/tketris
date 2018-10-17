@@ -73,11 +73,19 @@ class Tketris(Frame, GameLogic):
         if self.game_continue:
             self.move_down()
 
+    def handle_reset_game(self):
+        """
+        Docstring for handle_reset_game
+        """
+        if not self.game_continue:
+            self.start_game()
+
     def start_game(self):
         """
         Starts clock
         """
         self.side_menu.select_playing()
+        self.clear_tiles()
         self.game_continue = True
         self.run_clock()
 

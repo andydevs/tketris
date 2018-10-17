@@ -49,6 +49,12 @@ class SideMenu(Frame):
         """
         self.select_menu(PlayingMenu)
 
+    def reset_game(self):
+        """
+        Docstring for reset_game
+        """
+        self.master.handle_reset_game()
+
 class PlayingMenu(Frame):
     """
     Shows the PlayingMenu
@@ -83,4 +89,12 @@ class GameOverMenu(Frame):
         Initializes UI
         """
         self.label = Label(self, text="Game Over")
-        self.label.pack(fill=Y, expand=1)
+        self.label.pack()
+        self.reset_button = Button(self, text="Restart", command=self.reset_game)
+        self.reset_button.pack()
+
+    def reset_game(self):
+        """
+        Docstring for reset_game
+        """
+        self.master.reset_game()

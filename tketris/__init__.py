@@ -40,38 +40,10 @@ class Tketris(Frame, GameLogic):
         """
         Docstring for init_events
         """
-        self.master.bind('<Up>', self.handle_up)
-        self.master.bind('<Left>', self.handle_left)
-        self.master.bind('<Right>', self.handle_right)
-        self.master.bind('<Down>', self.handle_down)
-
-    def handle_up(self, event):
-        """
-        Docstring for handle_up
-        """
-        if self.game_continue:
-            self.rotate()
-
-    def handle_left(self, event):
-        """
-        Docstring for handle_down
-        """
-        if self.game_continue:
-            self.move_left()
-
-    def handle_right(self, event):
-        """
-        Docstring for handle_down
-        """
-        if self.game_continue:
-            self.move_right()
-
-    def handle_down(self, event):
-        """
-        Docstring for handle_down
-        """
-        if self.game_continue:
-            self.move_down()
+        self.master.bind('<Up>', self.rotate)
+        self.master.bind('<Left>', self.move_left)
+        self.master.bind('<Right>', self.move_right)
+        self.master.bind('<Down>', self.move_down)
 
     def handle_reset_game(self):
         """
@@ -97,8 +69,8 @@ class Tketris(Frame, GameLogic):
             self.clock_tick_update()
             self.master.after(1000, self.run_clock)
 
-    def game_over_event(self):
+    def game_over(self):
         """
-        Docstring for game_over_event
+        Docstring for game_over
         """
         self.side_menu.select_game_over()

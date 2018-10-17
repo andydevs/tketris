@@ -72,27 +72,34 @@ class GameLogic:
             self.new_mino()
             if not self.can_move_down():
                 self.game_continue = False
-                self.game_over_event()
+                self.game_over()
         else:
-            self.move_down()
+            self.move_down(None)
 
-    def rotate(self):
+    def can_rotate(self):
+        """
+        Docstring for can_rotate
+        """
+        return self.game_continue
+
+    def rotate(self, event):
         """
         Rotate current mino
         """
-        self.mino.orientation = (self.mino.orientation + 1) % 4
-        self.render()
+        if self.can_rotate():
+            self.mino.orientation = (self.mino.orientation + 1) % 4
+            self.render()
 
     def can_move_left(self):
         """
         True if the current mino can move left
         """
-        return not (
+        return self.game_continue and not (
             self.bounds.left_bound.collision(self.mino.tiles) \
             or self.board_tileset.right_bound.collision(self.mino.tiles)
         )
 
-    def move_left(self):
+    def move_left(self, event):
         """
         Move current mino left
         """
@@ -104,12 +111,12 @@ class GameLogic:
         """
         True if the current mino can move right
         """
-        return not (
+        return self.game_continue and not (
             self.bounds.right_bound.collision(self.mino.tiles) \
             or self.board_tileset.left_bound.collision(self.mino.tiles)
         )
 
-    def move_right(self):
+    def move_right(self, event):
         """
         Move current mino right
         """
@@ -121,12 +128,12 @@ class GameLogic:
         """
         True if the current mino can move down
         """
-        return not (
+        return self.game_continue and not (
             self.bounds.down_bound.collision(self.mino.tiles) \
             or self.board_tileset.up_bound.collision(self.mino.tiles)
         )
 
-    def move_down(self):
+    def move_down(self, event):
         """
         Move current mino down
         """
@@ -134,8 +141,8 @@ class GameLogic:
             self.mino.position += np.array([1, 0])
             self.render()
 
-    def game_over_event(self):
+    def game_over(self):
         """
-        Docstring for game_over_event
+        Docstring for game_over
         """
         pass

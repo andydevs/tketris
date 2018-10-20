@@ -72,3 +72,9 @@ class Tketris(Frame, GameLogic):
         Docstring for game_over
         """
         self.side_menu.select_game_over()
+
+    def on_update_score(self):
+        """
+        Docstring for on_update_score
+        """
+        self.side_menu.display_score(self.score)

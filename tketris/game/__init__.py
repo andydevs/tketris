@@ -79,6 +79,7 @@ class GameLogic(RotateAction, MoveLeftAction, MoveRightAction, MoveDownAction):
         Docstring for soft_drop
         """
         self.score += 4
+        self.on_update_score()
 
     def row_score(self, rows):
         """
@@ -92,6 +93,10 @@ class GameLogic(RotateAction, MoveLeftAction, MoveRightAction, MoveDownAction):
             self.score += 300
         elif rows == 4:
             self.score += 1200
+
+        # Only call update score if score was actually updated
+        if rows > 0:
+            self.on_update_score()
 
     def clock_tick_update(self):
         """

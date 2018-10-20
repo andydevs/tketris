@@ -52,15 +52,6 @@ class Tketris(Frame, GameLogic):
         if not self.game_continue:
             self.start_game()
 
-    def start_game(self):
-        """
-        Starts clock
-        """
-        self.side_menu.select_playing()
-        self.clear_tiles()
-        self.game_continue = True
-        self.run_clock()
-
     def run_clock(self):
         """
         Runs clock
@@ -69,7 +60,14 @@ class Tketris(Frame, GameLogic):
             self.clock_tick_update()
             self.master.after(1000, self.run_clock)
 
-    def game_over(self):
+    def on_start_game(self):
+        """
+        Starts clock
+        """
+        self.side_menu.select_playing()
+        self.run_clock()
+
+    def on_game_over(self):
         """
         Docstring for game_over
         """

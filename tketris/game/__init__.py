@@ -22,7 +22,7 @@ class GameLogic(RotateAction, MoveLeftAction, MoveRightAction, MoveDownAction):
         """
         self.bounds = BoardBounds()
         self.board_tileset = BoardTileSet([])
-        self.new_mino()
+        self.score = 0
 
     def render(self):
         """
@@ -56,35 +56,78 @@ class GameLogic(RotateAction, MoveLeftAction, MoveRightAction, MoveDownAction):
         """
         self.board_tileset.clear_tiles()
 
-    def new_mino(self):
+    def add_mino_to_board(self):
         """
-        Initialize new mino
+        Docstring for add_mino_to_board
         """
-        self.mino = Mino.random()
-        self.render()
+        self.board_tileset.add_tiles(self.mino.tiles, self.mino.color)
+        rows = self.board_tileset.clear_rows()
+        self.row_score(rows)
 
     def new_round(self):
         """
         Docstring for new_round
         """
-        self.board_tileset.add_tiles(self.mino.tiles, self.mino.color)
-        self.board_tileset.clear_rows()
-        self.new_mino()
+        self.mino = Mino.random()
+        self.render()
         if not self.can_move_down():
             self.game_continue = False
-            self.game_over()
+            self.on_game_over()
+
+    def soft_drop(self):
+        """
+        Docstring for soft_drop
+        """
+        self.score += 4
+
+    def row_score(self, rows):
+        """
+        Docstring for row_score
+        """
+        if rows == 1:
+            self.score += 40
+        elif rows == 2:
+            self.score += 100
+        elif rows == 3:
+            self.score += 300
+        elif rows == 4:
+            self.score += 1200
 
     def clock_tick_update(self):
         """
         Docstring for clock_tick_update
         """
         if not self.can_move_down():
+            self.soft_drop()
+            self.add_mino_to_board()
             self.new_round()
         else:
             self.move_down(None)
 
-    def game_over(self):
+    def start_game(self):
+        """
+        Docstring for start_game
+        """
+        self.score = 0
+        self.board_tileset.clear_tiles()
+        self.game_continue = True
+        self.new_round()
+        self.on_start_game()
+
+    def on_start_game(self):
+        """
+        Docstring for on_start_game
+        """
+        pass
+
+    def on_game_over(self):
         """
         Docstring for game_over
+        """
+        pass
+
+    def on_update_score(self, score):
+        """
+        Docstring for update_score
         """
         pass

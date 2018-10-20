@@ -7,6 +7,8 @@ Author:  Anshul Kharbanda
 Created: 10 - 11 - 2018
 """
 from tkinter import *
+from .game_over import GameOverMenu
+from .playing import PlayingMenu
 
 class SideMenu(Frame):
     """
@@ -49,49 +51,12 @@ class SideMenu(Frame):
         """
         self.select_menu(PlayingMenu)
 
-    def reset_game(self):
+    def display_score(self, score):
         """
-        Docstring for reset_game
+        Docstring for display_score
         """
-        self.master.reset_game()
-
-class PlayingMenu(Frame):
-    """
-    Shows the PlayingMenu
-    """
-    def __init__(self, master=None):
-        """
-        Initializes instance
-        """
-        super(PlayingMenu, self).__init__(master)
-        self.init_ui()
-
-    def init_ui(self):
-        """
-        Initializes UI
-        """
-        self.label = Label(self, text="Playing")
-        self.label.pack(fill=Y, expand=1)
-
-class GameOverMenu(Frame):
-    """
-    Shows the GameOver Menu
-    """
-    def __init__(self, master=None):
-        """
-        Initializes instance
-        """
-        super(GameOverMenu, self).__init__(master)
-        self.init_ui()
-
-    def init_ui(self):
-        """
-        Initializes UI
-        """
-        self.label = Label(self, text="Game Over")
-        self.label.pack()
-        self.reset_button = Button(self, text="Restart", command=self.reset_game)
-        self.reset_button.pack()
+        if type(self.current_menu) is PlayingMenu:
+            self.current_menu.display_score(score)
 
     def reset_game(self):
         """

@@ -23,13 +23,34 @@ class PlayingMenu(Frame):
         """
         Initializes UI
         """
-        self.label = Label(self, text="Playing")
-        self.label.pack(fill=Y, expand=1)
-        self.score_label = Label(self, text="Score: 0")
-        self.score_label.pack(fill=Y, expand=1)
+        self.score = Label(self, text="Score: 0")
+        self.score.pack(fill=Y, expand=1)
+
+        # Buttons frame
+        self.buttons = Frame(self)
+        self.pause = Button(self.buttons,
+            text="Pause",
+            command=self.toggle_game_resume)
+        self.pause.pack()
+        self.buttons.pack(fill=Y, expand=1)
 
     def display_score(self, score):
         """
         Docstring for add_score
         """
-        self.score_label.config(text="Score: {}".format(score))
+        self.score.config(text="Score: {}".format(score))
+
+    def display_game_resume_state(self, resume):
+        """
+        Docstring for display_game_resume_state
+        """
+        if resume:
+            self.pause.config(text="Pause")
+        else:
+            self.pause.config(text="Resume")
+
+    def toggle_game_resume(self):
+        """
+        Docstring for pause
+        """
+        self.master.toggle_game_resume()

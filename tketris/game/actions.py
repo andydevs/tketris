@@ -8,7 +8,17 @@ Created: 10 - 11 - 2018
 """
 import numpy as np
 
-class RotateAction:
+class Action:
+    """
+    Docstring for Action
+    """
+    def can_do_action(self):
+        """
+        Docstring for can_do_action
+        """
+        return self.game_continue and self.game_resume
+
+class RotateAction(Action):
     """
     Docstring for RotateAction
     """
@@ -16,7 +26,7 @@ class RotateAction:
         """
         Docstring for can_rotate
         """
-        return self.game_continue
+        return self.can_do_action()
 
     def rotate(self, event):
         """
@@ -26,7 +36,7 @@ class RotateAction:
             self.mino.orientation = (self.mino.orientation + 1) % 4
             self.render()
 
-class MoveLeftAction:
+class MoveLeftAction(Action):
     """
     Docstring for MoveLeftAction
     """
@@ -34,7 +44,7 @@ class MoveLeftAction:
         """
         True if the current mino can move left
         """
-        return self.game_continue and not (
+        return self.can_do_action() and not (
             self.bounds.left_bound.collision(self.mino.tiles) \
             or self.board_tileset.right_bound.collision(self.mino.tiles)
         )
@@ -47,7 +57,7 @@ class MoveLeftAction:
             self.mino.position += np.array([0, -1])
             self.render()
 
-class MoveRightAction:
+class MoveRightAction(Action):
     """
     Docstring for MoveRightAction
     """
@@ -55,7 +65,7 @@ class MoveRightAction:
         """
         True if the current mino can move right
         """
-        return self.game_continue and not (
+        return self.can_do_action() and not (
             self.bounds.right_bound.collision(self.mino.tiles) \
             or self.board_tileset.left_bound.collision(self.mino.tiles)
         )
@@ -68,7 +78,7 @@ class MoveRightAction:
             self.mino.position += np.array([0, 1])
             self.render()
 
-class MoveDownAction:
+class MoveDownAction(Action):
     """
     Docstring for MoveDownAction
     """
@@ -76,7 +86,7 @@ class MoveDownAction:
         """
         True if the current mino can move down
         """
-        return self.game_continue and not (
+        return self.can_do_action() and not (
             self.bounds.down_bound.collision(self.mino.tiles) \
             or self.board_tileset.up_bound.collision(self.mino.tiles)
         )

@@ -116,6 +116,7 @@ class GameLogic(RotateAction, MoveLeftAction, MoveRightAction, MoveDownAction):
         self.score = 0
         self.board_tileset.clear_tiles()
         self.game_continue = True
+        self.game_resume = True
         self.new_round()
         self.on_start_game()
 

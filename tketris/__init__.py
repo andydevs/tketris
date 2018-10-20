@@ -52,12 +52,20 @@ class Tketris(Frame, GameLogic):
         if not self.game_continue:
             self.start_game()
 
+    def toggle_game_resume(self):
+        """
+        Docstring for pause_game
+        """
+        self.game_resume = not self.game_resume
+        self.side_menu.display_game_resume_state(self.game_resume)
+
     def run_clock(self):
         """
         Runs clock
         """
         if self.game_continue:
-            self.clock_tick_update()
+            if self.game_resume:
+                self.clock_tick_update()
             self.master.after(1000, self.run_clock)
 
     def on_start_game(self):

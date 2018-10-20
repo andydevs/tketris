@@ -21,7 +21,10 @@ class SideMenu(Frame):
         """
         Initializes master
         """
-        super(SideMenu, self).__init__(master, bd=1, bg=self.side_menu_color)
+        super(SideMenu, self).__init__(master,
+            bd=1,
+            bg=self.side_menu_color,
+            width=20)
         self.init_ui()
 
     def init_ui(self):
@@ -37,7 +40,7 @@ class SideMenu(Frame):
         if self.current_menu:
             self.current_menu.destroy()
         self.current_menu = MenuType(self)
-        self.current_menu.pack(fill=BOTH, expand=1)
+        self.current_menu.pack(fill=Y, expand=1)
 
     def select_game_over(self):
         """
@@ -58,8 +61,21 @@ class SideMenu(Frame):
         if type(self.current_menu) is PlayingMenu:
             self.current_menu.display_score(score)
 
+    def display_game_resume_state(self, resume):
+        """
+        Docstring for display_game_resume
+        """
+        if type(self.current_menu) is PlayingMenu:
+            self.current_menu.display_game_resume_state(resume)
+
     def reset_game(self):
         """
         Docstring for reset_game
         """
         self.master.reset_game()
+
+    def toggle_game_resume(self):
+        """
+        Docstring for pause_game
+        """
+        self.master.toggle_game_resume()

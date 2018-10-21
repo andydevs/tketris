@@ -23,10 +23,27 @@ class GameOverMenu(Frame):
         """
         Initializes UI
         """
-        self.label = Label(self, text="Game Over")
-        self.label.pack()
-        self.reset_button = Button(self, text="Restart", command=self.reset_game)
+        # Game over label
+        self.labels = Frame(self)
+        self.game_over_label = Label(self.labels, text="Game Over")
+        self.game_over_label.pack()
+        self.final_score_label = Label(self.labels, text="Final Score: 0")
+        self.final_score_label.pack()
+        self.labels.pack(fill=Y, expand=1)
+
+        # Buttons frame
+        self.buttons = Frame(self)
+        self.reset_button = Button(self.buttons,
+            text="Restart",
+            command=self.reset_game)
         self.reset_button.pack()
+        self.buttons.pack(fill=Y, expand=1)
+
+    def display_final_score(self, final_score):
+        """
+        Docstring for display_final_score
+        """
+        self.final_score_label.config(text="Final Score: {}".format(final_score))
 
     def reset_game(self):
         """

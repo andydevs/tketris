@@ -68,6 +68,13 @@ class SideMenu(Frame):
         if type(self.current_menu) is PlayingMenu:
             self.current_menu.display_game_resume_state(resume)
 
+    def display_final_score(self, final_score):
+        """
+        Docstring for display_final_score
+        """
+        if type(self.current_menu) is GameOverMenu:
+            self.current_menu.display_final_score(final_score)
+
     def reset_game(self):
         """
         Docstring for reset_game

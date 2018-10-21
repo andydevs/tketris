@@ -40,7 +40,7 @@ class SideMenu(Frame):
         if self.current_menu:
             self.current_menu.destroy()
         self.current_menu = MenuType(self)
-        self.current_menu.pack(fill=Y, expand=1)
+        self.current_menu.pack(fill=Y, expand=1, ipadx=10, ipady=10)
 
     def select_game_over(self):
         """

@@ -24,12 +24,10 @@ class GameOverMenu(Frame):
         Initializes UI
         """
         # Game over label
-        self.labels = Frame(self)
-        self.game_over_label = Label(self.labels, text="Game Over")
-        self.game_over_label.pack()
-        self.final_score_label = Label(self.labels, text="Final Score: 0")
-        self.final_score_label.pack()
-        self.labels.pack(fill=Y, expand=1)
+        self.game_over_label = Label(self, text="Game Over")
+        self.game_over_label.pack(fill=Y, expand=1)
+        self.final_score_label = Label(self, text="Final Score: 0")
+        self.final_score_label.pack(fill=Y, expand=1)
 
         # Buttons frame
         self.buttons = Frame(self)

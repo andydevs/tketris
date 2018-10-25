@@ -12,7 +12,8 @@ from .playing import PlayingMenu
 
 class SideMenu(Frame):
     """
-    Side Menu Frame
+    Side Menu Frame which displays game state and score
+    Handles actions like pause/resume and restart
     """
     side_menu_color = "#ccc"
     current_menu = None

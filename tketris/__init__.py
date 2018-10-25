@@ -13,7 +13,7 @@ from tkinter import *
 
 class Tketris(Frame, GameLogic):
     """
-    Tketris application instance
+    The main application frame. Includes the GameLogic mixin
     """
     DEBUG = False
 
@@ -38,7 +38,7 @@ class Tketris(Frame, GameLogic):
 
     def init_events(self):
         """
-        Docstring for init_events
+        Initializes keybound events
         """
         self.master.bind('<Up>', self.rotate)
         self.master.bind('<Left>', self.move_left)
@@ -47,14 +47,14 @@ class Tketris(Frame, GameLogic):
 
     def reset_game(self):
         """
-        Docstring for handle_reset_game
+        Resets game
         """
         if not self.game_continue:
             self.start_game()
 
     def toggle_game_resume(self):
         """
-        Docstring for pause_game
+        Toggle game resume state and update menu
         """
         self.game_resume = not self.game_resume
         self.side_menu.display_game_resume_state(self.game_resume)
@@ -70,20 +70,20 @@ class Tketris(Frame, GameLogic):
 
     def on_start_game(self):
         """
-        Starts clock
+        Select playing and start clock on start game
         """
         self.side_menu.select_playing()
         self.run_clock()
 
     def on_game_over(self):
         """
-        Docstring for game_over
+        Displays game over menu and display final score on game over
         """
         self.side_menu.select_game_over()
         self.side_menu.display_final_score(self.score)
 
     def on_update_score(self):
         """
-        Docstring for on_update_score
+        Display score on playing menu on update score
         """
         self.side_menu.display_score(self.score)

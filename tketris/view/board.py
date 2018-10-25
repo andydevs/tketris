@@ -10,7 +10,7 @@ from tkinter import *
 
 class Board(Frame):
     """
-    Tketris Game Board
+    Tketris Game Board where the mino magic happens!
     """
     bg_color = "white"
     clear_color = None

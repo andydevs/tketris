@@ -8,13 +8,27 @@ Created: 10 - 11 - 2018
 """
 import numpy as np
 
+"""
+This file defines the code which checks for boundaries through which the
+current mino is unable to move.
+
+Before a mino is allowed to move, the action checks if the mino is occupying
+the corresponding boundary. If so, it is not allowed to move in that direction
+and will not respond to the command
+"""
+
 class Bound:
     """
     Generic bound class
     """
     def collision(self, tiles):
         """
-        Check if any tiles equals one of the bounds
+        Check if any of the given tiles is within any of the tiles in the bound
+
+        :param tiles: the tiles being checked
+
+        :return: True if any of the given tiles is within any of the tiles
+                 in the bound
         """
         return np.any([
             np.any([
@@ -50,7 +64,7 @@ class TileSetBound(Bound):
     @property
     def tiles(self):
         """
-        Docstring for bound property
+        The tiles that occupy this bound
         """
         if self.root_tiles.shape[0] == 0:
             return np.array([])
@@ -76,7 +90,7 @@ class BoardBound(Bound):
     @property
     def tiles(self):
         """
-        Docstring for tiles property
+        The tiles that occupy this bound
         """
         tiles = []
         for i in range(self.size):

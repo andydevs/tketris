@@ -20,4 +20,5 @@ setup(name='tketris',
         'tketris.game',
         'tketris.view',
         'tketris.view.side_menu'
-      ])
+      ],
+      install_requires=['numpy'])

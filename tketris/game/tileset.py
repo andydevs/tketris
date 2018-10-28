@@ -29,7 +29,7 @@ class BoardTileSet:
         """
         Adds the given tiles in the given color to the tileset
         """
-        for tile in tiles:
+        for tile in tiles.tolist():
             self.tile_colors.append((tile[0], tile[1], color))
 
     def clear_rows(self):

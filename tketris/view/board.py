@@ -7,6 +7,7 @@ Author:  Anshul Kharbanda
 Created: 10 - 11 - 2018
 """
 from tkinter import *
+import numpy as np
 
 class Board(Frame):
     """
@@ -55,7 +56,7 @@ class Board(Frame):
         """
         Draws all tiles
         """
-        for tile in tiles:
+        for tile in tiles.tolist():
             self.draw_tile(tile, color)
 
     def clear_tiles(self):

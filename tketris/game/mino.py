@@ -8,6 +8,7 @@ Created: 10 - 11 - 2018
 """
 import numpy as np
 from random import choice as random_choice
+from ..numpy_algorithms import transform_tileset
 
 class Mino:
     """
@@ -22,7 +23,7 @@ class Mino:
         """
         mtype = type(name, (Mino,), {
             'color':color,
-            'shape':np.array(shape)
+            'shape':np.array(shape, dtype=int)
         })
         cls.minos.append(mtype)
         return mtype
@@ -42,20 +43,11 @@ class Mino:
         self.orientation = orientation
 
     @property
-    def orientrix(self):
-        """
-        Orientation matrix
-        """
-        return np.linalg.matrix_power(
-            np.array([[0, 1], [-1, 0]]),
-            self.orientation)
-
-    @property
     def tiles(self):
         """
         The absolute tile positions of the mino
         """
-        return np.add(np.dot(self.shape, self.orientrix), self.position)
+        return transform_tileset(self.position, self.orientation, self.shape)
 
 # Mino types
 IMino = Mino.new_type('IMino', '#00bbff', [

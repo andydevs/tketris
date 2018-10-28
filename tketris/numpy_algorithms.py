@@ -63,24 +63,18 @@ def transform_tileset(pos, rot, tiles):
     :return: transformed tiles
     """
     # Transform matrix
-    translate_matrix = np.matrix([
-        [     0,      0, 0],
-        [     0,      0, 0],
-        [pos[0], pos[1], 1]
+    transform_matrix = np.matrix([
+        [ np.cos(rot*np.pi/2), np.sin(rot*np.pi/2), 0],
+        [-np.sin(rot*np.pi/2), np.cos(rot*np.pi/2), 0],
+        [ pos[0],              pos[1],              1]
     ])
-    rotate_matrix = np.matrix([
-        [ 0,                   np.sin(rot*np.pi/2), 0],
-        [-np.sin(rot*np.pi/2), 0,                   0],
-        [ 0,                   0,                   1]
-    ])
-    transform_matrix = np.matmul(rotate_matrix, translate_matrix)
 
-    # Homogenous vector array
+    # Homogenous tiles array
     one_column = np.ones((tiles.shape[0], 1))
-    homogenous_tiles = np.concatenate(tiles, one_column, axis=1)
+    homogenous_tiles = np.concatenate((tiles, one_column), axis=1)
 
     # Multiply homogenous vector array by transform matrix
     transformed_homogenous_tiles = np.matmul(homogenous_tiles, transform_matrix)
 
     # Return tiles extracted from transformed homogenous tiles
-    return transformed_homogenous_tiles[:,0:2]
+    return transformed_homogenous_tiles[:,0:2].astype(int)

@@ -7,6 +7,7 @@ Author:  Anshul Kharbanda
 Created: 10 - 11 - 2018
 """
 import numpy as np
+from ..numpy_algorithms import tileset_intersection, tile_in_set
 
 """
 This file defines the code which checks for boundaries through which the
@@ -30,15 +31,7 @@ class Bound:
         :return: True if any of the given tiles is within any of the tiles
                  in the bound
         """
-        return np.any([
-            np.any([
-                np.all(
-                    np.equal(bound, tile)
-                )
-                for bound in self.tiles
-            ])
-            for tile in tiles
-        ])
+        return tileset_intersection(tiles, self.tiles)
 
 class TileSetBound(Bound):
     """
@@ -69,11 +62,9 @@ class TileSetBound(Bound):
         if self.root_tiles.shape[0] == 0:
             return np.array([])
         else:
-            individual_boundaries = self.root_tiles + self.normal
-            return np.array([
-                boundary for boundary in individual_boundaries
-                if not any(np.all(np.equal(tile, boundary)) for tile in self.root_tiles)
-            ])
+            bounds = self.root_tiles + self.normal
+            bound_is_open = np.logical_not(tile_in_set(bounds, self.root_tiles))
+            return np.compress(bound_is_open, bounds, axis=0)
 
 class BoardBound(Bound):
     """

@@ -20,15 +20,19 @@ def tile_in_set(tiles_a, tiles_b):
     :return: an array of booleans which are true if the tile in that row matches
              any of the tiles in the other tileset
     """
-    # Expand arrays into third dimension
-    expanded_a = np.expand_dims(tiles_a, axis=1)
-    expanded_b = np.expand_dims(tiles_b, axis=0)
+    # Return false if any of the arguments have no dimension
+    if tiles_a.shape[0] == 0 or tiles_b.shape[0] == 0:
+        return False
+    else:
+        # Expand arrays into third dimension
+        expanded_a = np.expand_dims(tiles_a, axis=1)
+        expanded_b = np.expand_dims(tiles_b, axis=0)
 
-    # Check equality of point pairs
-    point_pair_equal = np.all(np.equal(expanded_a, expanded_b), axis=2)
+        # Check equality of point pairs
+        point_pair_equal = np.all(np.equal(expanded_a, expanded_b), axis=2)
 
-    # Return array of checks for each point pair
-    return np.any(point_pair_equal, axis=1)
+        # Return flattened array of checks for each point pair
+        return np.any(point_pair_equal, axis=1).flatten()
 
 
 def tileset_intersection(tiles_a, tiles_b):

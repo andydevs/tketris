@@ -8,9 +8,24 @@ Created: 10 - 11 - 2018
 """
 import numpy as np
 
+"""
+These are the actions that the user can perform in the game They are grouped
+into mixins by their required functionality. Each of these actions are bound
+by a key. They have a condition function (preceding with "can"), and the
+action is only performed if this condition is true.
+
+Current actions are:
+    - Rotate mino
+    - Move mino left
+    - Move mino right
+    - Move mino down
+"""
+
 class Action:
     """
-    Docstring for Action
+    MIXIN
+
+    Generic action done on a key event
     """
     def can_do_action(self):
         """
@@ -20,7 +35,9 @@ class Action:
 
 class RotateAction(Action):
     """
-    Docstring for RotateAction
+    MIXIN
+
+    Rotate mino
     """
     def can_rotate(self):
         """
@@ -38,7 +55,9 @@ class RotateAction(Action):
 
 class MoveLeftAction(Action):
     """
-    Docstring for MoveLeftAction
+    MIXIN
+
+    Move mino left
     """
     def can_move_left(self):
         """
@@ -59,7 +78,9 @@ class MoveLeftAction(Action):
 
 class MoveRightAction(Action):
     """
-    Docstring for MoveRightAction
+    MIXIN
+
+    Move mino right
     """
     def can_move_right(self):
         """
@@ -80,7 +101,9 @@ class MoveRightAction(Action):
 
 class MoveDownAction(Action):
     """
-    Docstring for MoveDownAction
+    MIXIN
+
+    Move mino down
     """
     def can_move_down(self):
         """

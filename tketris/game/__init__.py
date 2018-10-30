@@ -14,7 +14,9 @@ from .mino import Mino
 
 class GameLogic(RotateAction, MoveLeftAction, MoveRightAction, MoveDownAction):
     """
-    Tketris Game Logic mixin
+    MIXIN
+
+    Main Tketris Game Logic
     """
     def init_game(self):
         """

@@ -11,5 +11,4 @@
     - Rename boundaries in board tileset to more appropriately match action
         - Rename right to left and left to right
         - Rename up to down
-    - Implement actions as good handlers
-        - Install/Add good_handlers Dependency
+    - Replace actions with a controller mixin

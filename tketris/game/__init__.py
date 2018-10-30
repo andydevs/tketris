@@ -20,7 +20,7 @@ class GameLogic(RotateAction, MoveLeftAction, MoveRightAction, MoveDownAction):
     """
     def init_game(self):
         """
-        Initialize game
+        Initialize game logic
         """
         self.bounds = BoardBounds()
         self.board_tileset = BoardTileSet([])
@@ -54,13 +54,14 @@ class GameLogic(RotateAction, MoveLeftAction, MoveRightAction, MoveDownAction):
 
     def clear_tiles(self):
         """
-        Docstring for clear_tiles
+        Clear tiles on the board
         """
         self.board_tileset.clear_tiles()
 
     def add_mino_to_board(self):
         """
-        Docstring for add_mino_to_board
+        Adds mino to board tileset, clears required rows,
+        and adds row score to the total score
         """
         self.board_tileset.add_tiles(self.mino.tiles, self.mino.color)
         rows = self.board_tileset.clear_rows()
@@ -68,7 +69,8 @@ class GameLogic(RotateAction, MoveLeftAction, MoveRightAction, MoveDownAction):
 
     def new_round(self):
         """
-        Docstring for new_round
+        Creates a new mino, starting a new round
+        (trigger game over if new mino can't move down)
         """
         self.mino = Mino.random()
         self.render()
@@ -78,14 +80,16 @@ class GameLogic(RotateAction, MoveLeftAction, MoveRightAction, MoveDownAction):
 
     def soft_drop(self):
         """
-        Docstring for soft_drop
+        Add soft drop score
         """
         self.score += 4
         self.on_update_score()
 
     def row_score(self, rows):
         """
-        Docstring for row_score
+        Compute row score given number of cleared rows
+
+        :param rows: number of cleared rows
         """
         if rows == 1:
             self.score += 40
@@ -102,7 +106,8 @@ class GameLogic(RotateAction, MoveLeftAction, MoveRightAction, MoveDownAction):
 
     def clock_tick_update(self):
         """
-        Docstring for clock_tick_update
+        Update every clock tick. If mino can't move down, add soft drop score,
+        add mino to board, and start new round. Else just move the mino down.
         """
         if not self.can_move_down():
             self.soft_drop()
@@ -113,7 +118,7 @@ class GameLogic(RotateAction, MoveLeftAction, MoveRightAction, MoveDownAction):
 
     def start_game(self):
         """
-        Docstring for start_game
+        Start new game. Reset board and score. Set flags. Start new round.
         """
         self.score = 0
         self.board_tileset.clear_tiles()
@@ -124,18 +129,24 @@ class GameLogic(RotateAction, MoveLeftAction, MoveRightAction, MoveDownAction):
 
     def on_start_game(self):
         """
-        Docstring for on_start_game
+        HOOK
+
+        Called after game starts
         """
         pass
 
     def on_game_over(self):
         """
-        Docstring for game_over
+        HOOK
+
+        Called after game over
         """
         pass
 
     def on_update_score(self, score):
         """
-        Docstring for update_score
+        HOOK
+
+        Called after score updates
         """
         pass

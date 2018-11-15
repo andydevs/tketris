@@ -3,6 +3,19 @@
 - Do Now
     - Add better documentation describing implementation [in progress]
         - Comments
+            - Game
+                - Actions [DONE]
+                - Bounds [DONE]
+                - Mino
+                - TileSet
+                - GameLogic
+            - View
+                - Board
+                - SideMenu
+                    - Game Over
+                    - Playing
+            - Main Tketris
+            - Numpy Algorithms
         - README.md
     - Publish to PyPI
 - Architecture

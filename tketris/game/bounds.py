@@ -13,9 +13,13 @@ from ..numpy_algorithms import tileset_intersection, tile_in_set
 This file defines the code which checks for boundaries through which the
 current mino is unable to move.
 
-Before a mino is allowed to move, the action checks if the mino is occupying
+This is implemented by computing all of the tiles that constitute a boundary in a
+given direction. Since a mino can only move at right angles, if the mino occupies
+any of these tiles, it is assumed the mino cannot move in that direction.
+
+Before a mino is allowed to move, the control logic checks if the mino is occupying
 the corresponding boundary. If so, it is not allowed to move in that direction
-and will not respond to the command
+and will not respond to the command.
 """
 
 class Bound:

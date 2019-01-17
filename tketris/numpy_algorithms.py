@@ -11,8 +11,8 @@ import numpy as np
 
 def tile_in_set(tiles_a, tiles_b):
     """
-    Returns an array of booleans which are true if the tile in that row matches
-    any of the tiles in the other tileset
+    Returns an array of booleans which indicate if the corresponding tile 
+    in the first tileset is found in the second tileset
 
     :param tiles_a: the first tileset being checked
     :param tiles_b: the second tileset being checked

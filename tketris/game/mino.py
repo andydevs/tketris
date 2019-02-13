@@ -10,16 +10,36 @@ import numpy as np
 from random import choice as random_choice
 from ..numpy_algorithms import transform_tileset
 
+"""
+The tetris mino classes. In tketris, Minos are represented as objects 
+containing the basic set of tiles comprising the mino shape, as well 
+as the current position and orientation of the Mino. Mino objects 
+have a method which automatically calculates the tiles to draw 
+when rendering.
+"""
+
 class Mino:
     """
-    Mino abstraction
+    Mino abstraction. This class contains the class method 'new_mino' which 
+    generates a new subclass for a particular mino type given the type's 
+    information, used below. This method also appends the new mino type to 
+    the minos array, which is used in the 'random' method. 
+    
+    The 'random' method returns a random mino at the given position and 
+    orientation (default at the top middle at orientation 0).
     """
+    
+    # The minos array. 'random' picks a mino type from this array
     minos = []
 
     @classmethod
     def new_type(cls, name, color, shape):
         """
-        Creates a new mino type with the given name color shape
+        Creates a new mino type and saves it to the minos array.
+        
+        :param name: the name of the new mino type
+        :param color: the tile color of the mino type
+        :param shape: the shape tileset of the mino type (centered at 0,0)
         """
         mtype = type(name, (Mino,), {
             'color':color,
@@ -31,13 +51,21 @@ class Mino:
     @classmethod
     def random(cls, position=(0, 4), orientation=0):
         """
-        Returns a random new mino
+        Returns a random new mino at the given position and orientation
+        
+        :param position: initial position of new mino (default to top center)
+        :param orientation: orientation of new mino (default to top center)
+        
+        :return: random new mino at position and orientation
         """
         return random_choice(cls.minos)(position, orientation)
 
     def __init__(self, position=(0, 4), orientation=0):
         """
-        Initializes instance
+        Initializes new Mino at given position and orientation
+        
+        :param position: initial position of new mino (default to top center)
+        :param orientation: orientation of new mino (default to top center)
         """
         self.position = np.array(position)
         self.orientation = orientation

@@ -11,30 +11,38 @@ from .bounds import TileSetBound
 
 class BoardTileSet:
     """
-    Current tiles on the board
+    Represents all tiles currently on the board.
+    Handles boundaries for tiles and row completion detection.
     """
     def __init__(self, tile_colors=[]):
         """
-        Initializes instance
+        Initializes instance with the given initial tile colors
+        
+        :param tile_colors: initial tile_colors
         """
         self.tile_colors = tile_colors
 
     def clear_tiles(self):
         """
-        Docstring for clear_tiles
+        Clears all tiles from board
         """
         self.tile_colors = []
 
     def add_tiles(self, tiles, color):
         """
         Adds the given tiles in the given color to the tileset
+        
+        :param tiles: set of tiles to add
+        :param color: color of new tiles being added
         """
         for tile in tiles.tolist():
             self.tile_colors.append((tile[0], tile[1], color))
 
     def clear_rows(self):
         """
-        Clears all full rows (returns number of rows cleared)
+        Clears all full rows.
+        
+        :return: number of rows cleared
         """
         cleared_rows = 0
         required_columns = {i for i in range(10)}
@@ -54,7 +62,7 @@ class BoardTileSet:
     @property
     def tiles(self):
         """
-        Docstring for tiles property
+        All tiles in the tileset as a numpy tileset
         """
         return np.array([[i, j] for i, j, color in self.tile_colors])
 

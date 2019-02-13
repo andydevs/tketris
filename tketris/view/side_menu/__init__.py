@@ -13,14 +13,15 @@ from .playing import PlayingMenu
 class SideMenu(Frame):
     """
     Side Menu Frame which displays game state and score
-    Handles actions like pause/resume and restart
+    Handles actions like pause/resume and restart and
+    switching between playing and game over menus
     """
     side_menu_color = "#ccc"
     current_menu = None
 
     def __init__(self, master=None):
         """
-        Initializes master
+        Initializes Frame
         """
         super(SideMenu, self).__init__(master,
             bd=1,
@@ -36,7 +37,7 @@ class SideMenu(Frame):
 
     def select_menu(self, MenuType):
         """
-        Select new menu
+        Select new menu to display
         """
         if self.current_menu:
             self.current_menu.destroy()
@@ -45,45 +46,51 @@ class SideMenu(Frame):
 
     def select_game_over(self):
         """
-        Docstring for select_game_over
+        Display game over menu
         """
         self.select_menu(GameOverMenu)
 
     def select_playing(self):
         """
-        Docstring for select_playing
+        Display select playing menu
         """
         self.select_menu(PlayingMenu)
 
     def display_score(self, score):
         """
-        Docstring for display_score
+        Display current score
+        
+        :param score: current score of game
         """
         if type(self.current_menu) is PlayingMenu:
             self.current_menu.display_score(score)
 
     def display_game_resume_state(self, resume):
         """
-        Docstring for display_game_resume
+        Display game resume state
+        
+        :param resume: true if game is resumed, false if paused
         """
         if type(self.current_menu) is PlayingMenu:
             self.current_menu.display_game_resume_state(resume)
 
     def display_final_score(self, final_score):
         """
-        Docstring for display_final_score
+        Display final game score
+        
+        :param final_score: final score of the game
         """
         if type(self.current_menu) is GameOverMenu:
             self.current_menu.display_final_score(final_score)
 
     def reset_game(self):
         """
-        Docstring for reset_game
+        Handle for starting new game
         """
         self.master.reset_game()
 
     def toggle_game_resume(self):
         """
-        Docstring for pause_game
+        Handle for toggle game resume
         """
         self.master.toggle_game_resume()

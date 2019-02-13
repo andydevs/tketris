@@ -16,7 +16,8 @@ class GameLogic(RotateAction, MoveLeftAction, MoveRightAction, MoveDownAction):
     """
     MIXIN
 
-    Main Tketris Game Logic
+    Main Tketris Game Logic. All of the magic happens here!
+    Well... most of the magic... just the game logic, as the name suggests...
     """
     def init_game(self):
         """

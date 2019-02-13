@@ -13,3 +13,10 @@ Make sure you have `pip` installed. ~~Type `pip install tketris` to install~~ (n
 ## Usage
 
 Just type `python -m tketris` and start playing!
+
+|     Key     |   Control  |
+|:-----------:|:----------:|
+| Left Arrow  | Move Left  |
+| Right Arrow | Move Right |
+| Up Arrow    | Rotate     |
+| Down Arrow  | Soft Drop  |

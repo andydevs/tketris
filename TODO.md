@@ -3,12 +3,7 @@
 - Do Now
     - Add better documentation describing implementation [in progress]
         - Comments
-            - Game
-                - Actions [DONE]
-                - Bounds [DONE]
-                - Mino [DONE]
-                - TileSet [Done]
-                - GameLogic
+            - Game [DONE]
             - View
                 - Board
                 - SideMenu

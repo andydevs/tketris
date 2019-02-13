@@ -15,7 +15,9 @@
                     - Game Over
                     - Playing
             - Main Tketris
-            - Numpy Algorithms [DONE]
+            - Numpy Algorithms
+                - Main
+                - Functions [DONE]
         - README.md
     - Publish to PyPI
 - Architecture

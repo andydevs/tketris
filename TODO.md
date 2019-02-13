@@ -6,7 +6,7 @@
             - Game
                 - Actions [DONE]
                 - Bounds [DONE]
-                - Mino
+                - Mino [DONE]
                 - TileSet
                 - GameLogic
             - View

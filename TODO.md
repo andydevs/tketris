@@ -7,7 +7,7 @@
                 - Actions [DONE]
                 - Bounds [DONE]
                 - Mino [DONE]
-                - TileSet
+                - TileSet [Done]
                 - GameLogic
             - View
                 - Board

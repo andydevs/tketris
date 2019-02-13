@@ -8,7 +8,7 @@ Tketris is Tetris implemented in Python and Tkinter
 
 NOTE: Works for Python 3
 
-Make sure you have `pip` installed. ~~Type `pip install tketris` to install~~ (not uploaded to pip yet)
+Make sure you have `pip` installed. Type `pip install tketris` to install
 
 ## Usage
 

@@ -6,8 +6,11 @@ Tetris using tkinter
 Author:  Anshul Kharbanda
 Created: 10 - 11 - 2018
 """
-from functools import reduce
 import numpy as np
+
+"""
+Helper methods for tketris systems that use numpy (pretty much the tilesets).
+"""
 
 def tile_in_set(tiles_a, tiles_b):
     """

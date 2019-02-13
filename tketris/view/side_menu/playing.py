@@ -56,6 +56,6 @@ class PlayingMenu(Frame):
 
     def toggle_game_resume(self):
         """
-        Toggle game pause or resume
+        Handle to toggle game pause or resume
         """
         self.master.toggle_game_resume()

@@ -1,14 +1,6 @@
 # TO-DO
 
 - Do Now
-    - Add better documentation describing implementation [in progress]
-        - Comments
-            - Game [DONE]
-            - View [DONE]
-            - Main Tketris [DONE]
-            - Numpy Algorithms [DONE]
-        - README.md
-            - Controls
     - Publish to PyPI
 - Architecture
     - Move render from GameLogic to main Tketris class

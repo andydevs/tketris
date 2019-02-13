@@ -10,11 +10,11 @@ from tkinter import *
 
 class PlayingMenu(Frame):
     """
-    Shows the PlayingMenu
+    The side menu shown during gameplay.
     """
     def __init__(self, master=None):
         """
-        Initializes instance
+        Initializes Frame
         """
         super(PlayingMenu, self).__init__(master)
         self.init_ui()
@@ -36,13 +36,18 @@ class PlayingMenu(Frame):
 
     def display_score(self, score):
         """
-        Docstring for add_score
+        Display current score
+        
+        :param score: the current score to display
         """
         self.score.config(text="Score: {}".format(score))
 
     def display_game_resume_state(self, resume):
         """
-        Docstring for display_game_resume_state
+        Display the appropriate pause/resume button text
+        based on resume state
+        
+        :param resume: true if the game has resumed, false if paused
         """
         if resume:
             self.pause.config(text="Pause")
@@ -51,6 +56,6 @@ class PlayingMenu(Frame):
 
     def toggle_game_resume(self):
         """
-        Docstring for pause
+        Toggle game pause or resume
         """
         self.master.toggle_game_resume()

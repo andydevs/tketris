@@ -10,11 +10,11 @@ from tkinter import *
 
 class GameOverMenu(Frame):
     """
-    Shows the GameOver Menu
+    Side Menu shown on Game Over
     """
     def __init__(self, master=None):
         """
-        Initializes instance
+        Initializes Frame
         """
         super(GameOverMenu, self).__init__(master)
         self.init_ui()
@@ -39,12 +39,14 @@ class GameOverMenu(Frame):
 
     def display_final_score(self, final_score):
         """
-        Docstring for display_final_score
+        Display final score after game
+        
+        :param final_score: final score of the game
         """
         self.final_score_label.config(text="Final Score: {}".format(final_score))
 
     def reset_game(self):
         """
-        Docstring for reset_game
+        Handle to start new game
         """
         self.master.reset_game()

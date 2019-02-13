@@ -5,7 +5,7 @@
         - Comments
             - Game [DONE]
             - View [DONE]
-            - Main Tketris
+            - Main Tketris [DONE]
             - Numpy Algorithms [DONE]
         - README.md
             - Controls

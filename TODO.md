@@ -6,9 +6,7 @@
             - Game [DONE]
             - View
                 - Board
-                - SideMenu
-                    - Game Over
-                    - Playing
+                - SideMenu [DONE]
             - Main Tketris
             - Numpy Algorithms [DONE]
         - README.md

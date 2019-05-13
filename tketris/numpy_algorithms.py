@@ -14,7 +14,7 @@ Helper methods for tketris systems that use numpy (pretty much the tilesets).
 
 def tile_in_set(tiles_a, tiles_b):
     """
-    Returns an array of booleans which indicate if the corresponding tile 
+    Returns an array of booleans which indicate if the corresponding tile
     in the first tileset is found in the second tileset
 
     :param tiles_a: the first tileset being checked
@@ -55,7 +55,7 @@ def tileset_intersection(tiles_a, tiles_b):
     return np.any(tiles_in_set)
 
 
-def transform_tileset(pos, rot, tiles):
+def transform_tileset(pos, rot, tiles, debug=False):
     """
     Returns the transformed tileset, at the correct position and rotation
 
@@ -65,19 +65,35 @@ def transform_tileset(pos, rot, tiles):
 
     :return: transformed tiles
     """
+    # Debug initial
+    if debug:
+        print('-----------------------TRANSFORM TILESET-----------------------')
+        print('Position:', pos)
+        print('Rotation:', rot)
+        print('Tiles:')
+        print(tiles)
+
     # Transform matrix
+    isin = [0,  1,  0, -1]
+    icos = [1,  0, -1,  0]
     transform_matrix = np.matrix([
-        [ np.cos(rot*np.pi/2), np.sin(rot*np.pi/2), 0],
-        [-np.sin(rot*np.pi/2), np.cos(rot*np.pi/2), 0],
-        [ pos[0],              pos[1],              1]
+        [  icos[rot],   isin[rot], 0 ],
+        [ -isin[rot],   icos[rot], 0 ],
+        [  pos[0],      pos[1],    1 ]
     ])
 
     # Homogenous tiles array
     one_column = np.ones((tiles.shape[0], 1))
     homogenous_tiles = np.concatenate((tiles, one_column), axis=1)
 
-    # Multiply homogenous vector array by transform matrix
-    transformed_homogenous_tiles = np.matmul(homogenous_tiles, transform_matrix)
+    # Get transformed tiles
+    transformed_tiles = np.matmul(homogenous_tiles, transform_matrix)
+    transformed_tiles = transformed_tiles.astype(int)[:,0:2]
+
+    # Transformed tiles debug
+    if debug:
+        print('Transformed Tileset:')
+        print(transformed_tiles)
 
     # Return tiles extracted from transformed homogenous tiles
-    return transformed_homogenous_tiles[:,0:2].astype(int)
+    return transformed_tiles

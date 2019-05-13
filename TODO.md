@@ -1,7 +1,7 @@
 # TO-DO
 
 Bugs
-- [ ] Minos change at top and left
+- [x] Minos change at top and left
 - [ ] Mino clips into the side on rotate
 
 Architecture

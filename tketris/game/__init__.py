@@ -73,7 +73,7 @@ class GameLogic(RotateAction, MoveLeftAction, MoveRightAction, MoveDownAction):
         Creates a new mino, starting a new round
         (trigger game over if new mino can't move down)
         """
-        self.mino = Mino.random()
+        self.mino = Mino.random(debug=self.DEBUG)
         self.render()
         if not self.can_move_down():
             self.game_continue = False

@@ -19,9 +19,8 @@ parser.add_argument('-d', '--debug', action='store_true')
 if __name__ == '__main__':
     args = parser.parse_args(argv[1:])
     root = Tk()
-    app = Tketris(root)
+    app = Tketris(root, debug=args.debug)
     app.pack()
-    app.DEBUG = args.debug
     root.title('Tketris')
     root.resizable(False, False)
     root.mainloop()

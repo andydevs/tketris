@@ -17,11 +17,12 @@ class Tketris(Frame, GameLogic):
     """
     DEBUG = False
 
-    def __init__(self, master=None):
+    def __init__(self, master=None, debug=False):
         """
         Initializes application instance
         """
         super(Tketris, self).__init__(master)
+        self.DEBUG = debug
         self.init_ui()
         self.init_events()
         self.init_game()

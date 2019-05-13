@@ -37,14 +37,14 @@ class GameLogic(RotateAction, MoveLeftAction, MoveRightAction, MoveDownAction):
         # If debugging
         if self.DEBUG:
             # Draw boundaries of board
-            self.board.draw_tiles(self.bounds.left_bound.tiles, '#faa')
-            self.board.draw_tiles(self.bounds.right_bound.tiles, '#afa')
-            self.board.draw_tiles(self.bounds.down_bound.tiles, '#aaf')
+            self.board.draw_tiles(self.bounds.left_bound.tiles, '#ccc')
+            self.board.draw_tiles(self.bounds.right_bound.tiles, '#ccc')
+            self.board.draw_tiles(self.bounds.down_bound.tiles, '#ccc')
 
             # Draw boundaries of board tiles
-            self.board.draw_tiles(self.board_tileset.left_bound.tiles, '#faa')
-            self.board.draw_tiles(self.board_tileset.right_bound.tiles, '#afa')
-            self.board.draw_tiles(self.board_tileset.up_bound.tiles, '#aaf')
+            self.board.draw_tiles(self.board_tileset.left_bound.tiles, '#ccc')
+            self.board.draw_tiles(self.board_tileset.right_bound.tiles, '#ccc')
+            self.board.draw_tiles(self.board_tileset.up_bound.tiles, '#ccc')
 
         # Render tiles on ground
         for i, j, color in self.board_tileset.tile_colors:

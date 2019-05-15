@@ -10,7 +10,7 @@ from distutils.core import setup
 
 # Setup function
 setup(name='tketris',
-      version='1.0',
+      version='1.0.1',
       description='Tetris written in python and tkinter',
       author='Anshul Kharbanda',
       author_email='akanshul97@gmail.com',

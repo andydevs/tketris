@@ -9,10 +9,10 @@ Created: 10 - 11 - 2018
 import numpy as np
 from .bounds import BoardBounds, TileSetBound
 from .tileset import BoardTileSet
-from .actions import RotateAction, MoveLeftAction, MoveRightAction, MoveDownAction
+from .controller import Controller
 from .mino import Mino
 
-class GameLogic(RotateAction, MoveLeftAction, MoveRightAction, MoveDownAction):
+class GameLogic(Controller):
     """
     MIXIN
 

@@ -21,11 +21,11 @@ Current actions are:
     - Move mino down
 """
 
-class Action:
+class Controller:
     """
     MIXIN
 
-    Generic action done on a key event
+    Game controls
     """
     def can_do_action(self):
         """
@@ -33,12 +33,6 @@ class Action:
         """
         return self.game_continue and self.game_resume
 
-class RotateAction(Action):
-    """
-    MIXIN
-
-    Rotate mino
-    """
     def can_rotate(self):
         """
         Docstring for can_rotate
@@ -53,12 +47,6 @@ class RotateAction(Action):
             self.mino.orientation = (self.mino.orientation + 1) % 4
             self.render()
 
-class MoveLeftAction(Action):
-    """
-    MIXIN
-
-    Move mino left
-    """
     def can_move_left(self):
         """
         True if the current mino can move left
@@ -76,12 +64,6 @@ class MoveLeftAction(Action):
             self.mino.position += np.array([0, -1])
             self.render()
 
-class MoveRightAction(Action):
-    """
-    MIXIN
-
-    Move mino right
-    """
     def can_move_right(self):
         """
         True if the current mino can move right
@@ -99,12 +81,6 @@ class MoveRightAction(Action):
             self.mino.position += np.array([0, 1])
             self.render()
 
-class MoveDownAction(Action):
-    """
-    MIXIN
-
-    Move mino down
-    """
     def can_move_down(self):
         """
         True if the current mino can move down

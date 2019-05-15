@@ -15,5 +15,5 @@ Architecture
 - [ ] Rename boundaries in board tileset to more appropriately match action
     - [ ] Rename right to left and left to right
     - [ ] Rename up to down
-- [ ] Replace actions with a controller mixin
+- [x] Replace actions with a controller mixin
 - [ ] Update transform_tileset to use modulus instead of floats in transform matrix

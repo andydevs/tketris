@@ -7,7 +7,7 @@ Author:  Anshul Kharbanda
 Created: 10 - 11 - 2018
 """
 import numpy as np
-from .bounds import BoardBounds, TileSetBound
+from .bounds import BoardBounds, BoardRotateBounds, TileSetBound
 from .tileset import BoardTileSet
 from .controller import Controller
 from .mino import Mino
@@ -24,6 +24,7 @@ class GameLogic(Controller):
         Initialize game logic
         """
         self.bounds = BoardBounds()
+        self.rotate_bounds = BoardRotateBounds()
         self.board_tileset = BoardTileSet([])
         self.score = 0
 

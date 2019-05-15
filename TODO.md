@@ -2,7 +2,7 @@
 
 Bugs
 - [x] Minos change at top and left
-- [ ] Mino clips into the side on rotate
+- [x] Mino clips into the side on rotate
 - [ ] Mino clips into tiles on rotate
 
 Game Play

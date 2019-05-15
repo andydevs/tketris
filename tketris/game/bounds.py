@@ -98,10 +98,13 @@ class BoardBounds:
     """
     All Tketris game board bounds
     """
-    def __init__(self):
-        """
-        Initializes bounds
-        """
-        self.left_bound = BoardBound(1, 0, 20)
-        self.right_bound = BoardBound(1, 9, 20)
-        self.down_bound = BoardBound(0, 19, 10)
+    left_bound = BoardBound(1, 0, 20)
+    right_bound = BoardBound(1, 9, 20)
+    down_bound = BoardBound(0, 19, 10)
+
+class BoardRotateBounds:
+    """
+    Docstring for BoardRotateBounds
+    """
+    left_bound = BoardBound(1, -1, 20)
+    right_bound = BoardBound(1, 10, 20)

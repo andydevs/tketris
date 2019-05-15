@@ -7,6 +7,7 @@ Author:  Anshul Kharbanda
 Created: 10 - 11 - 2018
 """
 import numpy as np
+from copy import copy
 
 """
 These are the actions that the user can perform in the game They are grouped
@@ -21,7 +22,31 @@ Current actions are:
     - Move mino down
 """
 
-class Controller:
+class RotateLogic:
+    """
+    MIXIN
+
+    Rotation Logic
+    """
+    def rotate_adjust(self, event):
+        """
+        Docstring for rotate_adjust
+        """
+        while self.rotate_bounds.right_bound.collision(self.mino.tiles):
+            self.move_left(event)
+        while self.rotate_bounds.left_bound.collision(self.mino.tiles):
+            self.move_right(event)
+
+    def rotate(self, event):
+        """
+        Rotate current mino
+        """
+        if self.can_rotate():
+            self.mino.orientation = (self.mino.orientation + 1) % 4
+            self.rotate_adjust(event)
+            self.render()
+
+class Controller(RotateLogic):
     """
     MIXIN
 
@@ -38,14 +63,6 @@ class Controller:
         Docstring for can_rotate
         """
         return self.can_do_action()
-
-    def rotate(self, event):
-        """
-        Rotate current mino
-        """
-        if self.can_rotate():
-            self.mino.orientation = (self.mino.orientation + 1) % 4
-            self.render()
 
     def can_move_left(self):
         """
